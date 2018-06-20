@@ -11,6 +11,7 @@
 </h:head>
 <h:body>
     <h:form id="airLineForm">
+        <h:panelGroup>
             <p:growl id="airLinemsgs" showDetail="true"/>
             <p:growl id="airLinemsg" />
             <p:dataTable id="airlinelist" var="airline" value="#{airlineBean.airlines}" editable="true">
@@ -35,21 +36,11 @@
                 <p:column style="width:32px">
                     <p:rowEditor />
                 </p:column>
-                <!--<p:column style="width:32px">-->
-                    <!--<p:selectBooleanCheckbox value="#{airlineBean.value}">-->
-                        <!--<p:ajax listener="#{airlineBean.addMessage(flight)}" update=":form:msg" />-->
-                    <!--</p:selectBooleanCheckbox>-->
-                    <!--&lt;!&ndash;<p:commandButton actionListener="#{airlineBean.deleteFlight(flight)}" icon="ui-icon-close" >&ndash;&gt;-->
-                    <!--&lt;!&ndash;<p:ajax update=":form:wrapper"/>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</p:commandButton>&ndash;&gt;-->
-                <!--</p:column>-->
             </p:dataTable>
-            <!--<p:commandButton icon="ui-icon-close" >-->
-                <!--<p:ajax listener="#{airlineBean.deleteFlight}" update=":form:flightList"/>-->
-            <!--</p:commandButton>-->
-        <div>
-            <p:commandButton icon="ui-icon-close" value="Create Airline" action="createAirline.xhtml?faces-redirect=true"/>
-        </div>
+            <div>
+                <p:commandButton icon="ui-icon-close" value="Create Airline" action="createAirline.xhtml?faces-redirect=true"/>
+            </div>
+        </h:panelGroup>
     </h:form>
 </h:body>
 </html>
