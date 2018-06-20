@@ -26,9 +26,9 @@ public class FlightService {
 	// public
 
 	// CREATE MUST BE DONE THROUGH RELATED OBJECT
-	// public void create(Flight flight) {
-	// flightDao.create(flight);
-	// }
+	 public void create(Flight flight) {
+	 	flightDao.create(flight);
+	 }
 
 	// DELETE MUST BE DONE THROUGH UPDATE ON RELATED OBJECT
 	// public void delete(Flight flight) {
@@ -36,6 +36,7 @@ public class FlightService {
 	// }
 
 	public Flight update(Flight flight) {
+
 		return flightDao.update(flight);
 	}
 
@@ -81,6 +82,10 @@ public class FlightService {
 
 	public List<Flight> findAll() {
 		return flightDao.findAll();
+	}
+
+	public void deleteFlight(Flight flight){
+		flightDao.delete(flight);
 	}
 
 }

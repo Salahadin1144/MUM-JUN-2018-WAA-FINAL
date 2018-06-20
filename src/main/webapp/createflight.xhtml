@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>AirLines Web Applications</title>
+</h:head>
+<h:body>
+    <b:form style="width: 500px; margin-left: auto; margin-right: auto">
+        <b:inputText id="id" value="#{flightBean.id}" label="Flight Id: " />
+        <b:message for="@previous" />
+
+        <b:inputText id="flightNumber" value="#{flightBean.flightNumber}" label="Flight Number: " required="true"   />
+        <b:message for="@previous" />
+
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+                <b:dateTimePicker id="aGreatId" fieldId="evenGreaterFieldId" value="#{flightBean.departureDate}"
+                                  show-date="true" show-time="true"
+                                  widgetParent="#picker-anchor" label="Departure Date: " iconAwesome="bolt" />
+        </div></div>
+
+
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+                <b:dateTimePicker value="#{flightBean.departureTime}" show-date="true" show-time="true"
+                                  widgetParent="#picker-anchor" label="Departure Time: " iconAwesome="bolt" />
+        </div></div>
+
+
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+                <b:dateTimePicker value="#{flightBean.arrivalDate}"
+                                  show-date="true" show-time="true"
+                                  widgetParent="#picker-anchor" label="Arrival Date: " iconAwesome="bolt" />
+            </div></div>
+
+
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+                <b:dateTimePicker value="#{flightBean.arrivalTime}"
+                                  show-date="true" show-time="true"
+                                  widgetParent="#picker-anchor" label="Arrival Time: " iconAwesome="bolt" />
+            </div></div>
+
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+            <b:selectOneMenu value="#{flightBean.airlineName}" colMd="2" label="AirLine Name: " labelColMd="2" style="width: 450px">
+                <f:selectItems value="#{flightBean.allAirlineNames}" var="airlineName" itemValue="#{airlineName}" itemLabel="#{airlineName}"/>
+            </b:selectOneMenu>
+        </div></div>
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+            <b:selectOneMenu value="#{flightBean.originName}" colMd="2" label="Origin Airport: " labelColMd="2" style="width: 450px">
+                <f:selectItems value="#{flightBean.allAirportCodes}" var="originName" itemValue="#{originName}" itemLabel="#{originName}"/>
+            </b:selectOneMenu>
+        </div></div>
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+            <b:selectOneMenu value="#{flightBean.destinationName}" colMd="2" label="Destination Airport: " labelColMd="2" style="width: 450px">
+                <f:selectItems value="#{flightBean.allAirportCodes}" var="destinationName" itemValue="#{destinationName}" itemLabel="#{destinationName}"/>
+            </b:selectOneMenu>
+        </div></div>
+
+        <div style="overflow: hidden;">
+        <div class="form-group">
+            <b:selectOneMenu value="#{flightBean.airplaneModel}" colMd="2" label="Airplane Model: " labelColMd="2" style="width: 450px">
+                <f:selectItems value="#{flightBean.allAirplaneSerialNumbers}" var="airplaneModel" itemValue="#{airplaneModel}" itemLabel="#{airplaneModel}"/>
+            </b:selectOneMenu>
+        </div></div>
+        <div>
+            <b:commandButton value="click me!" ajax="true" action="#{flightBean.saveFlight()}" />
+        </div>
+    </b:form>
+</h:body>
+</html>

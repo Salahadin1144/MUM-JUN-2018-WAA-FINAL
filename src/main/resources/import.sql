@@ -1,24 +1,4 @@
-insert into airport (id,airportcode,city,country,name) values (4,'AMS','Amsterdam','The Netherlands','Schiphol');
-insert into airport (id,airportcode,city,country,name) values (5,'DTW','Detroid','USA','Detroid City');
-insert into airport (id,airportcode,city,country,name) values (8,'NRT','Tokyo','Japan','Narita International Airport');
-insert into airport (id,airportcode,city,country,name) values (12,'SYD','Sydney','Australia','Kingsford Smith');
-insert into airport (id,airportcode,city,country,name) values (13,'LAX','Los Angeles','USA','Los Angeles International');
-insert into airport (id,airportcode,city,country,name) values (19,'FRA','Frankfurt','Germany','Frankfurt International Airport');
-insert into airport (id,airportcode,city,country,name) values (20,'ORD','Chicago','USA','Chicago O''hare International');
-insert into airport (id,airportcode,city,country,name) values (23,'LHR','London','UK','London Heathrow');
-insert into airport (id,airportcode,city,country,name) values (27,'JFK','New York','USA','John F. Kennedy International');
-insert into airport (id,airportcode,city,country,name) values (29,'SIN','Singapore','Singapore','Changi Airport');
 
-insert into airline (id, name) values (2,'SkyTeam');
-insert into airline (id, name) values (10,'oneworld');
-insert into airline (id, name) values (17,'North Star');
-
-insert into airplane (id,capacity,model,serialnr) values (3,519,'A380','12345');
-insert into airplane (id,capacity,model,serialnr) values (7,416,'747','54321');
-insert into airplane (id,capacity,model,serialnr) values (11,519,'A380','23451');
-insert into airplane (id,capacity,model,serialnr) values (15,416,'747','43215');
-insert into airplane (id,capacity,model,serialnr) values (18,519,'A380','34512');
-insert into airplane (id,capacity,model,serialnr) values (22,416,'747','32154');
 
 insert into flight (id,arrivalDate,arrivalTime,departureDate,departureTime,flightnr,airline_id,airplane_id,destination_id,origin_id) values (1,'2015-06-25','09:00:00','2009-08-06','19:10:00','NW 36',2,3,4,5);
 insert into flight (id,arrivalDate,arrivalTime,departureDate,departureTime,flightnr,airline_id,airplane_id,destination_id,origin_id) values (6,'2015-06-25','13:45:00','2009-08-06','15:05:00','NW 96',2,7,5,8);

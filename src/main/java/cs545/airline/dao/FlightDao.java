@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -28,7 +30,12 @@ public class FlightDao {
 	}
 
 	public Flight update(Flight flight) {
-		return entityManager.merge(flight);
+		entityManager.getTransaction().begin();
+		Flight flight1 = entityManager.merge(flight);
+		entityManager.getTransaction().commit();
+		FacesMessage msg = new FacesMessage("", "FlightDAO: "+flight1.getDepartureTime());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		return flight1;
 	}
 
 	public void delete(Flight flight) {

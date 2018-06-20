@@ -164,4 +164,7 @@ public class Flight {
 		this.airplane = airplane;
 	}
 
+	public void edit(){
+
+	}
 }

@@ -5,6 +5,10 @@
 	version="3.1">
 	<display-name>airlinesWebApp</display-name>
 
+	<!--<context-param>-->
+		<!--<param-name>primefaces.THEME</param-name>-->
+		<!--<param-value>bluesky</param-value>-->
+	<!--</context-param>-->
 
 	<listener>
 		<listener-class>edu.mum.gf.workaround.ResouceReleaseListener</listener-class>
@@ -33,11 +37,6 @@
 	</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-
-	<context-param>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
 
 	<servlet>
 		<servlet-name>Faces</servlet-name>

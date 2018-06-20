@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Flights Page</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+
+            <p:growl id="msgs" showDetail="true"/>
+            <div style="margin: 10px">
+                <p:outputLabel for="airlineMenu" value="Airline Name:" />
+                <p:selectOneMenu id="airlineMenu" value="#{airlineBean.selectedName}" lazy="true" style="width:125px">
+                    <p:ajax listener="#{airlineBean.onAirlineChange}" update="flightList" />
+                    <f:selectItem itemLabel="Select One" itemValue="airline" />
+                    <f:selectItems value="#{airlineBean.airlineNames}" />
+                </p:selectOneMenu>
+            </div>
+        <h:panelGroup id="wrapper">
+            <p:growl id="msg" />
+            <p:dataTable id="flightList" var="flight" value="#{airlineBean.selectedAirlineFlights}" editable="true">
+                <!--rowKey="#{flight.id}" selection="#{airlineBean.selectedFlight}" selectionMode="single">-->
+                <f:facet name="header">
+                    #{airlineBean.name} Flight Listing
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{airlineBean.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{airlineBean.onRowCancel}" update=":form:msgs" />
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.id}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="idInput" value="#{flight.id}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Airline Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.airline.name}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="nameInput" value="#{flight.airline.name}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Plane SN#">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.airplane.serialnr}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="snlInput" value="#{flight.airplane.serialnr}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Plane Model">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.airplane.model}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{flight.airplane.model}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Arrival Date">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.arrivalDate}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="arrivalDateInput" value="#{flight.arrivalDate}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Arrival Time">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.arrivalTime}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="arrivalTimeInput" value="#{flight.arrivalTime}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Departure Date">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.departureDate}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="departureDateInput" value="#{flight.departureDate}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Departure Time">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.departureTime}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="departureTimeInput" value="#{flight.departureTime}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Origin">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.origin.name}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="originInput" value="#{flight.origin.name}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Destination">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.destination.name}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="destinaltionInput" value="#{flight.destination.name}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Flight Flight Number">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{flight.flightnr}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="flightNumberInput" value="#{flight.flightnr}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+                <p:column style="width:32px">
+                    <p:selectBooleanCheckbox value="#{airlineBean.value}">
+                        <p:ajax listener="#{airlineBean.addMessage(flight)}" update=":form:msg" />
+                    </p:selectBooleanCheckbox>
+                    <!--<p:commandButton actionListener="#{airlineBean.deleteFlight(flight)}" icon="ui-icon-close" >-->
+                        <!--<p:ajax update=":form:wrapper"/>-->
+                    <!--</p:commandButton>-->
+                </p:column>
+            </p:dataTable>
+            <p:commandButton icon="ui-icon-close" >
+                <p:ajax listener="#{airlineBean.deleteFlight}" update=":form:flightList"/>
+            </p:commandButton>
+            <p:commandButton icon="ui-icon-close" value="Create Flight" action="createflight.xhtml?faces-redirect=true"/>
+        </h:panelGroup>
+    </h:form>
+</h:body>
+</html>
