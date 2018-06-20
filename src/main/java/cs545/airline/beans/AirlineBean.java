@@ -5,15 +5,10 @@ import cs545.airline.model.Airline;
 import cs545.airline.model.Flight;
 import cs545.airline.service.AirlineService;
 import cs545.airline.service.FlightService;
-import org.primefaces.PrimeFaces;
-import org.primefaces.component.api.UIColumn;
-import org.primefaces.component.api.UIData;
 import org.primefaces.component.datatable.DataTable;
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIViewRoot;
@@ -24,7 +19,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Named
 @SessionScoped
@@ -135,15 +129,30 @@ public class AirlineBean implements Serializable {
     }
 
     public void onRowEdit(RowEditEvent event) {
-        this.selectedFlight = (Flight) event.getObject();
-        Flight flight = flightService.update(this.selectedFlight);
         FacesMessage msg = null;
-        if(flight != null){
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed successfully", "New:" + this.selectedFlight.getId());
+        if(event.getObject() instanceof Flight){
+            this.selectedFlight = (Flight) event.getObject();
+            Flight flight = flightService.update(this.selectedFlight);
 
+            if(flight != null){
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed successfully", "New:" + this.selectedFlight.getId());
+
+            }else{
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell not Changed!", "New:" + this.selectedFlight.getId());
+            }
         }else{
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell not Changed!", "New:" + this.selectedFlight.getId());
+            this.selectedAirline = (Airline) event.getObject();
+            Airline airline = airlineService.update(this.selectedAirline);
+
+            if(airline != null){
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed successfully", "New:" + this.selectedAirline.getId());
+
+            }else{
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell not Changed!", "New:" + this.selectedAirline.getId());
+            }
         }
+
+
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 

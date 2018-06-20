@@ -7,18 +7,49 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>AirLines Page</title>
+    <title>Airline Page</title>
 </h:head>
 <h:body>
-    <div style="height:500px">
-        <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px">
-            <h:panelGrid columns="1" cellpadding="10">
-                <p:commandButton action="#" value="Flights" style="width: 200px"/>
-                <p:commandButton action="#" value="Airplanes" style="width: 200px"/>
-                <p:commandButton action="#" value="AirLines" style="width: 200px"/>
-                <p:commandButton action="#" value="Airports" style="width: 200px"/>
-            </h:panelGrid>
-        </p:panel>
-    </div>
+    <h:form id="airLineForm">
+            <p:growl id="airLinemsgs" showDetail="true"/>
+            <p:growl id="airLinemsg" />
+            <p:dataTable id="airlinelist" var="airline" value="#{airlineBean.airlines}" editable="true">
+                <f:facet name="header">
+                    #{airlineBean.name} Airline Listing
+                </f:facet>
+                <p:ajax event="rowEdit" listener="#{airlineBean.onRowEdit}" update=":airLineForm:airLinemsgs" />
+                <p:ajax event="rowEditCancel" listener="#{airlineBean.onRowCancel}" update=":airLineForm:airLinemsgs" />
+
+                <p:column headerText="Id">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{airline.id}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="idInput" value="#{airline.id}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column headerText="Airline Name">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{airline.name}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="nameInput" value="#{airline.name}" style="width:100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                <p:column style="width:32px">
+                    <p:rowEditor />
+                </p:column>
+                <!--<p:column style="width:32px">-->
+                    <!--<p:selectBooleanCheckbox value="#{airlineBean.value}">-->
+                        <!--<p:ajax listener="#{airlineBean.addMessage(flight)}" update=":form:msg" />-->
+                    <!--</p:selectBooleanCheckbox>-->
+                    <!--&lt;!&ndash;<p:commandButton actionListener="#{airlineBean.deleteFlight(flight)}" icon="ui-icon-close" >&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p:ajax update=":form:wrapper"/>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</p:commandButton>&ndash;&gt;-->
+                <!--</p:column>-->
+            </p:dataTable>
+            <!--<p:commandButton icon="ui-icon-close" >-->
+                <!--<p:ajax listener="#{airlineBean.deleteFlight}" update=":form:flightList"/>-->
+            <!--</p:commandButton>-->
+        <div>
+            <p:commandButton icon="ui-icon-close" value="Create Airline" action="createAirline.xhtml?faces-redirect=true"/>
+        </div>
+    </h:form>
 </h:body>
 </html>

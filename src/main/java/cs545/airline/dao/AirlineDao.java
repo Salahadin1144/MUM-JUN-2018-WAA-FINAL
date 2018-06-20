@@ -1,21 +1,13 @@
 package cs545.airline.dao;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.transaction.*;
-
 import cs545.airline.model.Airline;
 import edu.mum.gf.workaround.JpaUtil;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 @Named
 @ApplicationScoped
@@ -38,7 +30,11 @@ public class AirlineDao {
 	}
 
 	public Airline update(Airline airline) {
-		return entityManager.merge(airline);
+
+			entityManager.getTransaction().begin();
+			Airline airline1 = entityManager.merge(airline);
+			entityManager.getTransaction().commit();
+			return  airline1;
 	}
 
 	public void delete(Airline airline) {

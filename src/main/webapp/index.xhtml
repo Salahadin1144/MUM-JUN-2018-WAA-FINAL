@@ -16,9 +16,12 @@
         <p:panel id="basic" header="Basic" footer="Movie Details" style="margin-bottom:20px">
             <h:panelGrid columns="1" cellpadding="10">
                 <p:button outcome="flight.xhtml" action="#" value="Flights" style="width: 200px"/>
-                <p:commandButton action="airplane" value="Airplanes" style="width: 200px"/>
-                <p:commandButton action="airline" value="AirLines" style="width: 200px"/>
-                <p:commandButton action="airport" value="Airports" style="width: 200px"/>
+
+                <p:button outcome = "airline.xhtml" action="#" value="AirLines" style="width: 200px"/>
+
+                <p:button action="airplane" value="Airplanes" style="width: 200px"/>
+
+                <p:button action="airport" value="Airports" style="width: 200px"/>
             </h:panelGrid>
         </p:panel>
         </h:form>
