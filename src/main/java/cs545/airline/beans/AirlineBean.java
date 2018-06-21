@@ -125,7 +125,7 @@ public class AirlineBean implements Serializable {
         airline.setId(this.getId());
         airline.setName(this.getName());
         airlineService.create(airline);
-        return "flight";
+        return "index?faces-redirect=true";
     }
 
     public void onRowEdit(RowEditEvent event) {
